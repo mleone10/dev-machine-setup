@@ -1,0 +1,19 @@
+---
+- name: install terminal colors
+  git:
+    repo: https://github.com/chriskempson/base16-shell.git
+    dest: ~/.config/base16-shell
+    clone: true
+- name: configure automatic terminal colors in new terminals
+  blockinfile:
+    path: ~/.bashrc
+    block: |
+      BASE16_SHELL="$HOME/.config/base16-shell/"
+      [ -n "$PS1" ] && \
+          [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+              eval "$("$BASE16_SHELL/profile_helper.sh")"
+- name: configure desired terminal colors
+  lineinfile:
+    path: ~/.bashrc
+    line: export BASE16_THEME_DEFAULT=default-dark
+    state: present

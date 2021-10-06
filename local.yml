@@ -1,0 +1,23 @@
+#!/usr/bin/ansible-playbook
+---
+- hosts: localhost
+  tasks:
+    - name: configure common aliases
+      lineinfile:
+        path: ~/.bash_aliases
+        line: "{{ item }}"
+        state: present
+        create: true
+      loop:
+        - alias clera="clear"
+        - alias gs="git status"
+        - alias gl="git branch -l"
+
+    - name: configure vs code extensions
+      command:
+        cmd: code --install-extension {{ item }}
+      loop:
+        - andrsdc.base16-themes
+
+    - name: configure terminal colors
+      include_tasks: tasks/configureColors.yml
