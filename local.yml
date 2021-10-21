@@ -1,6 +1,7 @@
 #!/usr/bin/ansible-playbook
 ---
 - hosts: localhost
+  become: true
   tasks:
     - name: configure common aliases
       lineinfile:
@@ -13,11 +14,8 @@
         - alias gs="git status"
         - alias gl="git branch -l"
 
-    - name: configure vs code extensions
-      command:
-        cmd: code --install-extension {{ item }}
-      loop:
-        - andrsdc.base16-themes
-
     - name: configure terminal colors
       include_tasks: tasks/configureColors.yml
+
+    - name: install terraform
+      include_tasks: tasks/installTerraform.yml
