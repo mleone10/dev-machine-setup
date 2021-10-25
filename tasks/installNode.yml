@@ -1,0 +1,16 @@
+---
+- name: download nvm installer
+  get_url:
+    url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh
+    dest: /tmp/nvmInstall.sh
+    mode: 0755
+
+- name: install nvm
+  shell: /tmp/nvmInstall.sh
+  args:
+    executable: /bin/bash
+
+- name: install latest version of node
+  shell: source ~/.nvm/nvm.sh && nvm install node
+  args:
+    executable: /bin/bash

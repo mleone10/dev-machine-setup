@@ -11,6 +11,7 @@
     - curl
 
 - name: add terraform gpg key
+  become: true
   apt_key:
     url: https://apt.releases.hashicorp.com/gpg
 
