@@ -1,0 +1,19 @@
+---
+- name: determine latest version of go
+  uri:
+    url: https://golang.org/VERSION?m=text
+    return_content: true
+  register: goVersion
+
+- name: download and unarchive go tarball
+  become: true
+  unarchive:
+    src: https://golang.org/dl/{{ goVersion.content }}.linux-amd64.tar.gz
+    dest: /usr/local
+    remote_src: true
+
+- name: ensure go is added to path
+  become: true
+  copy:
+    dest: /etc/profile.d/setGoPath.sh
+    content: "PATH=$PATH:/usr/local/go/bin"

@@ -21,3 +21,6 @@
 
     - name: install node
       include_tasks: tasks/installNode.yml
+
+    - name: install go
+      include_tasks: tasks/installGo.yml
