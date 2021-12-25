@@ -24,3 +24,6 @@
 
     - name: install go
       include_tasks: tasks/installGo.yml
+
+    - name: install docker
+      include_tasks: tasks/installDocker.yml

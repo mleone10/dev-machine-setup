@@ -1,14 +1,10 @@
 ---
-- name: download nvm installer
-  get_url:
-    url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh
-    dest: /tmp/nvmInstall.sh
-    mode: 0755
-
 - name: install nvm
-  shell: /tmp/nvmInstall.sh
+  shell: |
+    mkdir -p {{ ansible_env.HOME }}/.nvm
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | NVM_DIR={{ ansible_env.HOME }}/.nvm bash
   args:
-    executable: /bin/bash
+    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
 
 - name: install latest version of node
   shell: source ~/.nvm/nvm.sh && nvm install --lts

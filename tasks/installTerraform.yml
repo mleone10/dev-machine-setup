@@ -17,6 +17,7 @@
     url: https://apt.releases.hashicorp.com/gpg
 
 - name: add terraform apt repository
+  become: true
   apt_repository:
     repo: deb [arch=amd64] https://apt.releases.hashicorp.com bullseye main
     update_cache: true
