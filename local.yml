@@ -1,18 +1,10 @@
 #!/usr/bin/ansible-playbook
 ---
 - hosts: localhost
+  roles:
+    - role: role-aliases
+      become: true
   tasks:
-    - name: configure common aliases
-      lineinfile:
-        path: ~/.bash_aliases
-        line: "{{ item }}"
-        state: present
-        create: true
-      loop:
-        - alias clera="clear"
-        - alias gs="git status"
-        - alias gl="git branch -l"
-
     - name: configure terminal colors
       include_tasks: tasks/configureColors.yml
 
