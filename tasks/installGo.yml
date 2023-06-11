@@ -5,6 +5,12 @@
     return_content: true
   register: goVersion
 
+- name: remove previous go installation
+  become: true
+  ansible.builtin.file:
+    path: /usr/local/go
+    state: absent
+
 - name: download and unarchive go tarball
   become: true
   unarchive:
