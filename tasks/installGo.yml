@@ -15,5 +15,5 @@
 - name: ensure go is added to path
   become: true
   copy:
-    dest: /etc/profile.d/setGoPath.sh
-    content: "PATH=$PATH:/usr/local/go/bin"
+    dest: /etc/profile.d/setGoPaths.sh
+    content: "PATH=$PATH:/usr/local/go/bin:/~/go/bin"

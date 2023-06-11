@@ -1,16 +1,4 @@
 ---
-- name: install required packages
-  become: true
-  apt:
-    name: "{{ item }}"
-    update_cache: true
-    cache_valid_time: 3600
-    state: latest
-  loop:
-    - gnupg
-    - software-properties-common
-    - curl
-
 - name: add terraform gpg key
   become: true
   apt_key:
@@ -22,6 +10,17 @@
     repo: deb [arch=amd64] https://apt.releases.hashicorp.com bullseye main
     update_cache: true
     state: present
+- name: install required packages
+  become: true
+  apt:
+    name: "{{ item }}"
+    update_cache: true
+    cache_valid_time: 3600
+    state: latest
+  loop:
+    - gnupg
+    - software-properties-common
+    - curl
 
 - name: install terraform
   apt:
